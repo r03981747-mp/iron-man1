@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Libra — Modern Library System</title>
+  <meta name="description" content="Libra is a modern library management system: browse the catalog, borrow in a tap, pay fines securely and never miss a due date." />
+  <meta name="theme-color" content="#4f46e5" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Libra" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+<body>
+
+  <!-- ===================== Splash ===================== -->
+  <div id="splash" class="splash">
+    <div class="splash-logo">L</div>
+    <div class="splash-bar"><span></span></div>
+    <p class="splash-text">Opening the library…</p>
+  </div>
+
+  <!-- ===================== Auth ===================== -->
+  <section id="auth-screen" class="auth hidden">
+    <div class="auth-art">
+      <div class="blob blob-a"></div>
+      <div class="blob blob-b"></div>
+      <div class="blob blob-c"></div>
+      <div class="grain"></div>
+
+      <div class="auth-brand">
+        <span class="brand-mark">L</span>
+        <span class="brand-word">Libra</span>
+        <span class="brand-tag">Library OS</span>
+      </div>
+
+      <div class="art-copy">
+        <h1>Your library,<br /><em>beautifully</em> connected.</h1>
+        <p>Search the shelves, borrow in a tap, settle fines securely and never miss a due date — all from one calm, modern place.</p>
+      </div>
+
+      <div class="shelf" aria-hidden="true">
+        <div class="book b1" style="--i:0"><span>1984</span></div>
+        <div class="book b2" style="--i:1"><span>Sapiens</span></div>
+        <div class="book b3" style="--i:2"><span>Clean Code</span></div>
+        <div class="book b4" style="--i:3"><span>The Hobbit</span></div>
+        <div class="book b5" style="--i:4"><span>Foundation</span></div>
+        <div class="book b6" style="--i:5"><span>Gatsby</span></div>
+        <div class="shelf-board"></div>
+      </div>
+
+      <div class="auth-metrics">
+        <div><strong>20</strong><span>titles in the demo</span></div>
+        <div><strong>4</strong><span>bookable spaces</span></div>
+        <div><strong>3</strong><span>role-based views</span></div>
+      </div>
+    </div>
+
+    <div class="auth-panel">
+      <div class="auth-card" id="auth-card">
+        <div class="auth-tabs" role="tablist">
+          <button class="auth-tab active" data-auth-tab="login" type="button">Sign in</button>
+          <button class="auth-tab" data-auth-tab="register" type="button">Create account</button>
+        </div>
+
+        <form id="login-form" class="auth-form" autocomplete="on">
+          <h2>Welcome back</h2>
+          <p class="auth-sub">Sign in to continue your reading journey.</p>
+          <label class="field">
+            <span>Email address</span>
+            <input id="login-email" name="email" type="email" placeholder="you@example.com" required autocomplete="email" />
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <span class="password-wrap">
+              <input id="login-password" name="password" type="password" placeholder="Your password" required autocomplete="current-password" minlength="8" />
+              <button class="password-toggle" type="button" data-password-toggle="login-password" aria-label="Show password" aria-pressed="false">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12s3.2-5.5 9-5.5S21 12 21 12s-3.2 5.5-9 5.5S3 12 3 12z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg>
+              </button>
+            </span>
+          </label>
+          <button class="btn btn-primary btn-block" type="submit" id="login-submit">
+            <span>Sign in</span>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="demo-row">
+            <span class="demo-label">Try a demo</span>
+            <button type="button" class="demo-chip" data-demo="member">Member</button>
+            <button type="button" class="demo-chip" data-demo="librarian">Librarian</button>
+            <button type="button" class="demo-chip" data-demo="admin">Admin</button>
+          </div>
+        </form>
+
+        <form id="register-form" class="auth-form hidden">
+          <h2>Join the library</h2>
+          <p class="auth-sub">Create your free digital library card in seconds.</p>
+          <label class="field">
+            <span>Full name</span>
+            <input id="register-name" name="name" type="text" placeholder="Ada Lovelace" required minlength="2" autocomplete="name" />
+          </label>
+          <label class="field">
+            <span>Email address</span>
+            <input id="register-email" name="email" type="email" placeholder="you@example.com" required autocomplete="email" />
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <span class="password-wrap">
+              <input id="register-password" name="password" type="password" placeholder="At least 8 characters" required minlength="8" autocomplete="new-password" />
+              <button class="password-toggle" type="button" data-password-toggle="register-password" aria-label="Show password" aria-pressed="false">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12s3.2-5.5 9-5.5S21 12 21 12s-3.2 5.5-9 5.5S3 12 3 12z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg>
+              </button>
+            </span>
+          </label>
+          <button class="btn btn-primary btn-block" type="submit" id="register-submit">
+            <span>Create my account</span>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+
+        <p class="auth-foot">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 9.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Secured with JWT &middot; Stripe-ready payments
+        </p>
+        <p id="auth-live" class="sr-only" role="status" aria-live="polite"></p>
+      </div>
+      <p class="auth-legal">By continuing you agree to our friendly library code of conduct.</p>
+    </div>
+  </section>
+
+  <div id="auth-transition" class="auth-transition hidden" aria-hidden="true">
+    <div class="transition-panel left"></div>
+    <div class="transition-panel right"></div>
+    <div class="transition-mark">
+      <span class="brand-mark">L</span>
+      <p id="auth-transition-label">Opening your library…</p>
+    </div>
+  </div>
+
+  <!-- ===================== App ===================== -->
+  <div id="app-shell" class="app hidden">
+    <aside class="sidebar" aria-label="Primary">
+      <button class="brand brand-btn" data-view="dashboard" type="button">
+        <span class="brand-mark">L</span>
+        <span class="brand-word">Libra</span>
+      </button>
+
+      <nav class="nav">
+        <p class="nav-label">Discover</p>
+        <button class="nav-item active" data-view="dashboard" type="button" data-nav="dashboard">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 13h6V4H4v9zm0 7h6v-5H4v5zm10 0h6v-9h-6v9zm0-16v5h6V4h-6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-view="browse" type="button" data-nav="browse">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v18H6.5A2.5 2.5 0 014 18.5v-13z" stroke="currentColor" stroke-width="1.8"/><path d="M8 3v18M12 8h5M12 12h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <span>Browse catalog</span>
+        </button>
+        <button class="nav-item" data-view="shelves" type="button" data-nav="shelves">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M6.5 4.5h11A1.5 1.5 0 0119 6v13.5l-6.5-3-6.5 3V6a1.5 1.5 0 011.5-1.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8.5h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <span>My shelves</span>
+        </button>
+        <button class="nav-item" data-view="loans" type="button" data-nav="loans">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <span id="nav-loans-label">My loans</span>
+        </button>
+        <button class="nav-item" data-view="events" type="button" data-nav="events">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="16" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 9.5h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></svg>
+          <span>Events</span>
+        </button>
+        <button class="nav-item" data-view="spaces" type="button" data-nav="spaces">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 20h18M5 20V9.5L12 4l7 5.5V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 20v-5h6v5M9 9.5h.01M15 9.5h.01" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+          <span>Spaces</span>
+        </button>
+
+        <p class="nav-label" data-staff-only>Manage</p>
+        <button class="nav-item" data-view="members" type="button" data-nav="members" data-staff-only>
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M15.5 5.6a3.2 3.2 0 010 6.2M17.5 14.6c2 .5 3.2 2.2 3.6 4.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <span>Members</span>
+        </button>
+        <button class="nav-item" data-view="payments" type="button" data-nav="payments" data-staff-only>
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3 10h18" stroke="currentColor" stroke-width="1.8"/><path d="M7 15h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <span>Finance</span>
+        </button>
+        <button class="nav-item" data-view="audit" type="button" data-nav="audit" data-staff-only>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5.2c0 4.4-3 8.2-7 9.8-4-1.6-7-5.4-7-9.8V6l7-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.5 12.2l1.7 1.7 3.5-3.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Audit log</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-help">
+        <div class="sidebar-help-icon">✦</div>
+        <p>Need a hand?</p>
+        <span>Browse the interactive API docs or ask a librarian.</span>
+        <a href="/api/docs" target="_blank" rel="noreferrer">Open API docs ↗</a>
+      </div>
+
+      <button class="nav-item nav-logout" id="sidebar-logout" type="button">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M14 8V5.5A1.5 1.5 0 0012.5 4h-6A1.5 1.5 0 005 5.5v13A1.5 1.5 0 006.5 20h6a1.5 1.5 0 001.5-1.5V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M10 12h11M17.5 8.5L21 12l-3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Sign out</span>
+      </button>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar-search">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input id="global-search" type="search" placeholder="Search titles, authors, ISBN…" aria-label="Search catalog" />
+          <kbd>⏎</kbd>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-btn" id="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5 5l1.6 1.6M17.4 17.4L19 19M19 5l-1.6 1.6M6.6 17.4L5 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8 8 0 019.5 4 8.4 8.4 0 1020 14.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="notif-wrap">
+            <button class="icon-btn" id="notif-btn" type="button" title="Notifications" aria-label="Notifications" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M6 10a6 6 0 1112 0c0 4 1.5 5.5 1.5 5.5h-15S6 14 6 10z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 19a2 2 0 004 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <span class="dot hidden" id="notif-dot"></span>
+            </button>
+            <div class="notif-panel hidden" id="notif-panel" role="dialog" aria-label="Notifications"></div>
+          </div>
+          <div class="avatar-wrap">
+            <button class="avatar" id="avatar-btn" type="button" aria-haspopup="menu" aria-expanded="false">
+              <span id="avatar-initials">L</span>
+            </button>
+            <div class="menu hidden" id="avatar-menu" role="menu">
+              <div class="menu-head">
+                <strong id="menu-name">Reader</strong>
+                <span id="menu-email">—</span>
+              </div>
+              <button type="button" data-view="profile" role="menuitem">
+                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.8"/><path d="M5 20c.7-3.8 3.4-6 7-6s6.3 2.2 7 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                My profile
+              </button>
+              <button type="button" data-view="browse" role="menuitem">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v18H6.5A2.5 2.5 0 014 18.5v-13z" stroke="currentColor" stroke-width="1.8"/><path d="M8 3v18" stroke="currentColor" stroke-width="1.8"/></svg>
+                Browse catalog
+              </button>
+              <div class="menu-sep"></div>
+              <button type="button" id="menu-logout" class="danger" role="menuitem">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M14 8V5.5A1.5 1.5 0 0012.5 4h-6A1.5 1.5 0 005 5.5v13A1.5 1.5 0 006.5 20h6a1.5 1.5 0 001.5-1.5V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M10 12h11M17.5 8.5L21 12l-3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Sign out
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main id="view" class="view" tabindex="-1"></main>
+    </div>
+
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-nav-item active" data-view="dashboard" type="button" data-nav="dashboard">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 13h6V4H4v9zm0 7h6v-5H4v5zm10 0h6v-9h-6v9zm0-16v5h6V4h-6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <span>Home</span>
+      </button>
+      <button class="mobile-nav-item" data-view="browse" type="button" data-nav="browse">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v18H6.5A2.5 2.5 0 014 18.5v-13z" stroke="currentColor" stroke-width="1.8"/><path d="M8 3v18M12 8h5M12 12h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Browse</span>
+      </button>
+      <button class="mobile-nav-item" data-view="shelves" type="button" data-nav="shelves">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6.5 4.5h11A1.5 1.5 0 0119 6v13.5l-6.5-3-6.5 3V6a1.5 1.5 0 011.5-1.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8.5h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Shelves</span>
+      </button>
+      <button class="mobile-nav-item" data-view="loans" type="button" data-nav="loans">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Loans</span>
+      </button>
+      <button class="mobile-nav-item" data-view="events" type="button" data-nav="events">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="16" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 9.5h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Events</span>
+      </button>
+      <button class="mobile-nav-item" data-view="spaces" type="button" data-nav="spaces">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 20h18M5 20V9.5L12 4l7 5.5V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 20v-5h6v5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+        <span>Spaces</span>
+      </button>
+      <button class="mobile-nav-item" data-view="profile" type="button" data-nav="profile">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.8"/><path d="M5 20c.7-3.8 3.4-6 7-6s6.3 2.2 7 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Profile</span>
+      </button>
+    </nav>
+  </div>
+
+  <div id="modal-root"></div>
+  <div id="toast-root" class="toast-root" aria-live="polite"></div>
+
+  <div id="logout-overlay" class="logout-overlay hidden" role="status" aria-live="polite">
+    <div class="logout-card">
+      <div class="logout-visual" aria-hidden="true">
+        <div class="closing-book">
+          <span class="closing-page left"></span>
+          <span class="closing-page right"></span>
+          <span class="closing-spine"></span>
+        </div>
+        <span class="logout-spark spark-a">✦</span>
+        <span class="logout-spark spark-b">✧</span>
+      </div>
+      <p class="logout-kicker">Ending this chapter</p>
+      <h3>Closing the cover…</h3>
+      <p>Your shelves will be right here when you return.</p>
+      <div class="logout-progress"><span></span></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
